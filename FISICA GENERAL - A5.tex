@@ -1,0 +1,276 @@
+\PassOptionsToPackage{svgnames}{xcolor} %para los myblock - ha de estar al principio 
+\documentclass[a5paper, 10pt, spanish]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{float} %posicionar figuras
+\usepackage{multicol}
+\usepackage{multirow} % esto hará falta para figuras casi seguro
+\usepackage{amsmath} %ecuaciones bien
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx} %opciones /includegraphics[...]
+\usepackage{indentfirst} % sangria de primera linea
+%\setlength{\parindent}{0cm} %elimino sangrado 1a linea
+\usepackage{fancyhdr}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{esint} % integrales mejor
+\usepackage[top=1.8cm, bottom=1.6cm, left=2cm, right=1.6cm]{geometry} % márgenes (para encuadernado-book: impares más a la izquda, pares más a la dcha.
+\usepackage{comment} % comment environment
+\usepackage{physics}
+\usepackage{enumerate}
+%\usepackage{footnote} 
+%\makesavenoteenv{tabular} 
+%\makesavenoteenv{table}%% write footnotes on tables
+%\setlength{\parskip}{10px} %espacio parrafos error con teoremas
+%\usepackage{verbatim} % comentarios
+\usepackage{comment} % comentarios
+\usepackage{accents}
+\usepackage{pdfpages} %insertar pdfs
+\usepackage{ragged2e} % para  \justifying después de fcolorbox-parbox
+\usepackage{mathtools} 
+
+\widowpenalty10000
+\clubpenalty10000
+\setcounter{tocdepth}{3}
+
+%FLOAT EQNS LEFT
+\usepackage{nccmath} 
+\makeatletter
+\newcommand{\leqnomode}{\tagsleft@true}
+\newcommand{\reqnomode}{\tagsleft@false}
+\makeatother
+
+%nuevos colores - ahora tengo los "svgnames Colors"
+\definecolor{roig}{RGB}{196,49,24}
+\definecolor{morat}{RGB}{131,54,147}
+\definecolor{verd}{RGB}{85,107,47}
+\definecolor{gris}{RGB}{100,100,100}
+\definecolor{blau}{RGB}{0,0,100}
+\definecolor{fondoblau}{RGB}{232,255,255}
+\definecolor{fondoroig}{RGB}{245,194,194}
+\definecolor{fondoverd}{RGB}{209,240,192}
+
+\newcommand{\subrayado}[1]{\colorbox{LightYellow}{$\displaystyle #1$}} %fosforito ecuaciones begin{eq... 
+
+\newtheorem{teor}{Teorema}
+\newtheorem{coro}{Corolario}
+\newtheorem{prop}{Proposición}
+\newtheorem{defi}{Definición}
+\newtheorem{axio}{Axioma}
+\newtheorem{ejem}{Ejemplo}
+\newtheorem{ejer}{Ejercicio}
+\newtheorem{ejre}{Ejercicio resuelto}
+\newtheorem{ayud}{Ayuda.}
+\newtheorem{solu}{Solución.}
+\newtheorem{prob}{Problema}
+
+\numberwithin{equation}{chapter}
+\numberwithin{teor}{chapter}
+\numberwithin{coro}{chapter}
+\numberwithin{prop}{chapter}
+\numberwithin{defi}{chapter}
+\numberwithin{axio}{chapter}
+\numberwithin{ejem}{chapter}
+\numberwithin{ejer}{chapter}
+\numberwithin{ejre}{chapter}
+\numberwithin{ayud}{chapter}
+\numberwithin{solu}{chapter}
+\numberwithin{prob}{chapter}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{%
+\markboth{\thechapter.\ #1}{}}
+%\newcommand{\TheAuthor}{Ignacio Vallés Oriola} % As given in documentation of **fancyhdr**
+%\newcommand{\Author}[1]{\renewcommand{\TheAuthor}{#1}}
+\fancyhead{} % clear all fields
+%\lhead{\leftmark}
+%\rhead{Ignacio Vallés Oriola}
+\fancyhead[LO]{\MakeUppercase{\leftmark}}
+\fancyhead[RE]{\nouppercase{\rightmark}}
+\fancyhead[LE, RO]{\footnotesize{\textcolor{gris}{Ignacio Vallés Oriola}}}
+
+\usepackage{soul} %tachado, usando \textst{lo que se desea tachar} No vale en ecuaciones.
+\usepackage[makeroom]{cancel} % tachar en equaciones \cancel{a tachar}; \bcancel tacha al revés ; \xcancel tacha con x; \cancelto {0 (o \infty}{expresion a tachar} flecha con 0 o infty
+
+% blocks
+% \PassOptionsToPackage{svgnames}{xcolor}   ---- en primera línea
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+    
+\newenvironment{myexampleblock}[1]{% Verde
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=Honeydew,colframe=DarkGreen,%
+    colbacklower=LimeGreen!75!Honeydew,%
+    title={#1}]}%
+    {\endtcolorbox}
+ 
+\newenvironment{myalertblock}[1]{% Rojo
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=LavenderBlush,colframe=DarkRed,%
+    colbacklower=Tomato!75!LavenderBlush,%
+    title={#1}]}%
+    {\endtcolorbox}
+
+\newenvironment{myblock}[1]{% Azul
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colback=AliceBlue,colframe=DarkBlue,%
+    colbacklower=DarkBlue!75!AliceBlue,%
+    title={#1}]}%
+    {\endtcolorbox}
+    
+%párrafo gris claro (sin sangrado) MIPARRAFO
+   \usepackage{mdframed}
+   \usepackage{xcolor}
+   \newenvironment{miparrafo}
+      {\begin{mdframed}[
+        backgroundcolor=AliceBlue,
+        linecolor=gray]}
+     % ]\quotation}
+   {\endquotation\end{mdframed}}
+   
+ %párrafo destacado - amarillo claro (sin sangrado) MIPARRAFODESTACADO
+   \usepackage{mdframed}
+   \usepackage{xcolor}
+   \newenvironment{miparrafodestacado}
+      {\begin{mdframed}[
+        backgroundcolor=LightYellow,
+        linecolor=LightYellow]}
+     % ]\quotation}
+   {\endquotation\end{mdframed}}
+   
+
+\renewcommand{\baselinestretch}{1.2} %interlineado
+\setlength{\parskip}{2mm} %espacio entre párrafos
+
+\title{Física General.} 
+%	\\
+% -  \\ 
+%\large{(ampliado)}}
+
+\author{Ignacio Vallés Oriola.}
+\date{}
+
+\setcounter{tocdepth}{2} %hasta segundo nivel secc
+
+
+%\rotatebox{180}{\leftline{\textcolor{gris}{texto a escribir }}}
+% $\divideontimes$ ejercicio difÃ­cil
+%\rotatebox{180}{\leftline{\textcolor{gris}{\scriptsize{Sol: $\frac 1 {x^2}$ no está definida en $x0=\in [-3,2]$}}}}. 
+%!!!!!!!Texto escrito de dcha a izqda en cualquier parte del texto.
+%*************. \boldsymbol{$fórmula en negrita$}
+% ********  numero tachado horizontalmente --  $\text{\textst{5}}$
+
+\setlength{\parindent}{0 mm} %elimina sangrado primera línea - recuperarla--> 5 mmm
+
+\spanishdecimal{.}
+
+% Para resúmenes iniciales
+\newenvironment{resumen}
+{
+\begin{center}
+%\textbf{Resumen}.  Se puede añadir si se desea que aparezca este título
+\end{center}
+\begin{quote}\itshape
+}
+{
+\end{quote}
+}
+
+%ABSTRACT**************
+\usepackage{lipsum}
+%*********************************************************
+%***********PARRAFO/S SANGRADOS/S*************************
+%*********************************************************
+%   Reduce the margin of the summary:   
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist 
+% Generate the environment for the abstract:
+\newcommand\summaryname{Abstract}
+\newenvironment{Abstract}%
+    {\small\begin{center}%
+    \bfseries{\summaryname} \end{center}}
+
+% BASTA CON PONER:  \begin{changemargin}{1cm}{1cm}
+                    % Párrafo a sangrar
+                    %\end{changemargin}    
+%*********************************************************
+
+
+% CITAS alineado derecha con pie autor - con \begin{\cita}{Autor} cita-txt \end{cita}
+\newenvironment{cita}[1]
+{
+\def\autorc {#1}
+\begin{flushright}
+\itshape
+}
+{
+\par
+\medskip
+\autorc
+\end{flushright}
+}
+
+
+
+%\includeonly{TEMA27_chapter,TEMA28_chapter,APENDICES} %para ver solo esto, o VARIOS separado por comas
+
+%********************************************
+%******** CUERPO DEL DOCUMENTO **************
+%********************************************
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	\vspace*{\fill}
+	{\scshape\LARGE FÍSICA GENERAL\par}
+	\vspace{1cm}
+	{\Large Ignacio Vallés Oriola \par}
+	\vspace{3cm}
+	\includegraphics[width=0.75\textwidth]{imagenes/hic-svnt-dracones}
+	\vspace{3cm}
+\end{titlepage}
+
+\tableofcontents
+
+\include{TEMA00_chapter}
+\include{TEMA01_chapter}
+\include{TEMA02_chapter}
+\include{TEMA03_chapter}
+\include{TEMA04_chapter}
+\include{TEMA05_chapter}
+\include{TEMA06_chapter}
+\include{TEMA07_chapter}
+\include{TEMA08_chapter}
+\include{TEMA09_chapter}
+\include{TEMA10_chapter}
+\include{TEMA11_chapter}
+\include{TEMA12_chapter}
+\include{TEMA13_chapter}
+\include{TEMA14_chapter}
+\include{TEMA15_chapter}
+\include{TEMA16_chapter}
+\include{TEMA17_chapter}
+\include{TEMA18_chapter}
+\include{TEMA19_chapter}
+\include{TEMA20_chapter}
+\include{TEMA21_chapter}
+\include{TEMA22_chapter}
+\include{TEMA23_chapter}
+\include{TEMA24_chapter}
+\include{TEMA25_chapter}
+\include{TEMA26_chapter}
+\include{TEMA27_chapter}
+\include{TEMA28_chapter}
+\appendix
+\include{APENDICES}
+		
+\end{document}
